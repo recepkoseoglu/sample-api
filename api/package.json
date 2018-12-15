@@ -1,5 +1,5 @@
 {
-  "name": "data-api",
+  "name": "simple-json-api",
   "version": "1.0.0",
   "description": "Simple RESTful API",
   "main": "index.js",
