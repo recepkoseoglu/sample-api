@@ -3,5 +3,6 @@ dist/
 .git/
 .dockerignore
 .gitignore
+.vscode
 Dockerfile
 README.md
