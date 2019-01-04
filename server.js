@@ -15,7 +15,7 @@ server.use((req, res, next) => {
   if (!allowedMethods.includes(req.method)) {
     return res.send(405, 'Method Not Allowed');
   }
-  req.query._limit = req.query._limit || 20;
+  req.query._limit = req.query._limit || 100;
   next();
 });
 
