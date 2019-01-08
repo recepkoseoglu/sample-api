@@ -20,19 +20,21 @@ server.use((req, res, next) => {
 });
 
 server.use('/breadcrumb', (req, res, next) => {
-  const { categoryId } = req.query;
-  if (!categoryId) {
-    res.status(400).send('categoryId required as query string');
+  const { categoryId, categorySlug } = req.query;
+  if (!categoryId && !categorySlug) {
+    res.status(400).send('categoryId or categorySlug required as query string');
   }
   const breadcrumb = [];
-  const parent = id => {
-    const category = dataset.categories.find(i => i.id === id);
+  const parent = (id, categorySlug) => {
+    const category = dataset.categories.find(i =>
+      categorySlug ? i.slug === categorySlug : i.id === id,
+    );
     if (category) {
       breadcrumb.push(category);
       category.parentId && parent(category.parentId);
     }
   };
-  parent(parseInt(categoryId));
+  parent(parseInt(categoryId), categorySlug);
   res.json(breadcrumb);
 });
 
