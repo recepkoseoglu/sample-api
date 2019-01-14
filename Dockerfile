@@ -1,6 +1,6 @@
 FROM node:10
 
-WORKDIR /App
+WORKDIR /Graphql
 
 COPY package*.json ./
 
