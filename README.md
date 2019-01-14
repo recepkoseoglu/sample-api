@@ -8,16 +8,6 @@ For now Sample for products' an API. that is to use `json-server`. For more info
 /api/products
 ```
 
-## Docker
-
-For create and run docker image the following;
-
-```bash
-$ bash deploy.sh
-```
-
-Open http://localhost:3000 at browser.
-
 ## Getting started
 
 ### Install
