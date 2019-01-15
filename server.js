@@ -6,7 +6,7 @@ const middlewares = jsonServer.defaults();
 
 const dataset = require('./database/dataset.json');
 
-const allowedMethods = ['GET'];
+const allowedMethods = ['GET', 'PUT'];
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
