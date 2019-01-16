@@ -1,12 +1,11 @@
+import { breadcrumb } from './controller';
 const jsonServer = require('json-server');
 
 const server = jsonServer.create();
 const router = jsonServer.router('database/dataset.json');
 const middlewares = jsonServer.defaults();
 
-const dataset = require('./database/dataset.json');
-
-const allowedMethods = ['GET', 'PUT'];
+const allowedMethods = ['GET', 'PUT', 'POST'];
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
@@ -19,24 +18,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/breadcrumb', (req, res, next) => {
-  const { categoryId, categorySlug } = req.query;
-  if (!categoryId && !categorySlug) {
-    res.status(400).send('categoryId or categorySlug required as query string');
-  }
-  const breadcrumb = [];
-  const parent = (id, categorySlug) => {
-    const category = dataset.categories.find(i =>
-      categorySlug ? i.slug === categorySlug : i.id === id,
-    );
-    if (category) {
-      breadcrumb.push(category);
-      category.parentId && parent(category.parentId);
-    }
-  };
-  parent(parseInt(categoryId), categorySlug);
-  res.json(breadcrumb);
-});
+server.use('/breadcrumb', breadcrumb);
 
 server.use('/', router);
 
